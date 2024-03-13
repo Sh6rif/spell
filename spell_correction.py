@@ -1,4 +1,5 @@
 import sys
+import autocorrect
 
 try:
     from autocorrect import Speller
