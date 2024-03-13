@@ -6,7 +6,6 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 app.set("view engine", "ejs");
-app.use(express.static("views"));
 
 app.get("/", (req, res) => {
   res.render("spell-correct.ejs");
@@ -16,10 +15,7 @@ app.post("/correct", async (req, res) => {
   var inputText = req.body.text;
 
   // Execute the Python script
-  const pythonProcess = spawn("python", [
-    "views/py/spell_correction.py",
-    inputText,
-  ]);
+  const pythonProcess = spawn("python", ["spell_correction.py", inputText]);
 
   let correctedText = "";
 
