@@ -13,3 +13,4 @@ if __name__ == "__main__":
     corrected_text = correct_spelling(input_text)
     corrected_text = corrected_text.upper()
     print(corrected_text)
+    sys.stdout.flush()

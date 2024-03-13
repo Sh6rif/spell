@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
 
 app.post("/correct", async (req, res) => {
   var inputText = req.body.text;
-  console.log(inputText);
 
   // Execute the Python script
   const pythonProcess = spawn("python", [
@@ -26,7 +25,7 @@ app.post("/correct", async (req, res) => {
 
   // Collect data from the Python process
   pythonProcess.stdout.on("data", (data) => {
-    correctedText += data;
+    correctedText += data.toString();
   });
 
   // Handle errors
@@ -37,7 +36,6 @@ app.post("/correct", async (req, res) => {
   // When the process exits
   pythonProcess.on("close", (code) => {
     console.log(`Python process exited with code ${code}`);
-    console.log(correctedText);
     res.json(correctedText); // Send the corrected text back to the client
   });
 });
