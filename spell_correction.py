@@ -1,5 +1,10 @@
-from autocorrect import Speller
 import sys
+
+try:
+    from autocorrect import Speller
+except ImportError:
+    print("Please install the 'autocorrect' module using 'pip install autocorrect'")
+    sys.exit(1)
 
 
 def correct_spelling(text):
@@ -10,6 +15,10 @@ def correct_spelling(text):
     return corrected_text
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <input_text>")
+        sys.exit(1)
+        
     input_text = sys.argv[1]
     corrected_text = correct_spelling(input_text)
     corrected_text = corrected_text.upper()
