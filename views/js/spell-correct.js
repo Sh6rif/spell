@@ -5,7 +5,7 @@ async function correct() {
   input = document.getElementById("correctInput");
   filter = input.value.trim().toLowerCase();
   try {
-    const correct = await fetch(`http://localhost:3000/correct`, {
+    const correct = await fetch(`/correct`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
