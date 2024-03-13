@@ -22,4 +22,4 @@ if __name__ == "__main__":
     input_text = sys.argv[1]
     corrected_text = correct_spelling(input_text)
     corrected_text = corrected_text.upper()
-    print(corrected_text)
+    print(corrected_text + "hi")
