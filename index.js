@@ -2,7 +2,7 @@ const express = require("express");
 const { PythonShell } = require("python-shell");
 const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 4000;
 
 // Middleware setup
 app.use(cors());
