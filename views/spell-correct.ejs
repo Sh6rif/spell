@@ -81,8 +81,8 @@
           });
 
           const result = await correct.json();
-          console.log(result);
-          divText.innerHTML = `<p class="theText">${result}</p>`;
+          console.log(result.correctedText);
+          divText.innerHTML = `<p class="theText">${result.correctedText}</p>`;
         } catch (error) {
           console.error("Error fetching or processing data:", error);
         }

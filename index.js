@@ -1,41 +1,40 @@
 const express = require("express");
-const { spawn } = require("child_process");
-const cors = require("cors"); // Import CORS middleware
+const { PythonShell } = require("python-shell");
+const cors = require("cors");
 const app = express();
 const port = 3000;
+
+// Middleware setup
 app.use(cors());
 app.use(express.json());
 app.set("view engine", "ejs");
 
+// Root route
 app.get("/", (req, res) => {
   res.render("spell-correct.ejs");
 });
 
+// Spell correction route
+
 app.post("/correct", async (req, res) => {
-  var inputText = req.body.text;
+  const inputText = req.body.text;
 
-  // Execute the Python script
-  const pythonProcess = spawn("python", ["spell_correction.py", inputText]);
-
-  let correctedText = "";
-
-  // Collect data from the Python process
-  pythonProcess.stdout.on("data", (data) => {
-    correctedText += data.toString();
-  });
-
-  // Handle errors
-  pythonProcess.stderr.on("data", (data) => {
-    console.error(`Error: ${data}`);
-  });
-
-  // When the process exits
-  pythonProcess.on("close", (code) => {
-    console.log(`Python process exited with code ${code}`);
-    res.json(correctedText); // Send the corrected text back to the client
-  });
+  PythonShell.run(
+    "spell_correction.py",
+    { args: [inputText] },
+    function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to correct spelling" });
+      } else {
+        console.log("Corrected text:", result[0]);
+        res.json({ correctedText: result[0] });
+      }
+    }
+  );
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

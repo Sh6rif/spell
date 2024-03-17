@@ -1,12 +1,12 @@
 import sys
-import autocorrect
+import subprocess
 
 try:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "autocorrect"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     from autocorrect import Speller
 except ImportError:
     print("Please install the 'autocorrect' module using 'pip install autocorrect'")
     sys.exit(1)
-
 
 def correct_spelling(text):
     spell = Speller(lang='en')
@@ -23,4 +23,4 @@ if __name__ == "__main__":
     input_text = sys.argv[1]
     corrected_text = correct_spelling(input_text)
     corrected_text = corrected_text.upper()
-    print(corrected_text + "hi")
+    print(corrected_text)
