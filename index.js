@@ -27,7 +27,6 @@ app.post("/correct", async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Failed to correct spelling" });
       } else {
-        console.log("Corrected text:", result[0]);
         res.json({ correctedText: result[0] });
       }
     }

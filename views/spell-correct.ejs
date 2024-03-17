@@ -10,7 +10,6 @@
         margin: 0;
         box-sizing: border-box;
       }
-
       .wrap {
         width: 30%;
         position: absolute;
@@ -18,13 +17,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
-
       .correct {
         width: 100%;
         position: relative;
         display: flex;
       }
-
       .correctTerm {
         width: 100%;
         border: 3px solid #00b4cc;
@@ -34,17 +31,24 @@
         outline: none;
         color: #9dbfaf;
       }
-
       .correctTerm:focus {
         color: #00b4cc;
       }
-
       .correctText {
         text-align: center;
       }
-
       .theText {
         color: #00b4cc;
+      }
+      @media (max-width: 820px) {
+        .wrap {
+          width: 60%;
+        }
+      }
+      @media (max-width: 599px) {
+        .wrap {
+          width: 80%;
+        }
       }
     </style>
     <title>Spell Correct</title>
@@ -79,7 +83,6 @@
               text: filter,
             }),
           });
-
           const result = await correct.json();
           console.log(result.correctedText);
           divText.innerHTML = `<p class="theText">${result.correctedText}</p>`;
